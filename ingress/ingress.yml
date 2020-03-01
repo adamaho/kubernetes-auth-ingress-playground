@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: aaho-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/auth-url: "http://<service-ip>/auth-success"
+spec:
+  rules:
+    - host: hello-world.info
+      http:
+        paths:
+          - path: /api2
+            backend:
+              serviceName: api2
+              servicePort: 8080
